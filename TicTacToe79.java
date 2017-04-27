@@ -39,6 +39,12 @@ public class TicTacToe79
         int col;
         //variable that is used to toggle between player Xs turn and player Os turn
         boolean isxturn;
+        //initialize variable to keep track of how many times X wins before they decide to stop the game
+        int timesXwins = 0;
+        //initialize variable to keep track of how many times O wins before they decide to stop the game
+        int timesOwins = 0;
+        //initialize variable to keep track of how many times there was a draw when they decide to quit
+        int timesDraw = 0;
 
         while ("y".equals (playagain))
         {
@@ -109,6 +115,9 @@ public class TicTacToe79
                     if (winner)
                     {
                         out.println ("\nX is the winner!");
+                        timesXwins = timesXwins + 1;
+                        //call function to print the score
+                        score (timesXwins, timesOwins, timesDraw);
                     }
                     else
                     //call function to check if draw
@@ -117,9 +126,11 @@ public class TicTacToe79
                         if (draw)
                         {
                             out.println ("\nIt's a draw!");
+                            timesDraw = timesDraw + 1;
+                            //call function to print the score
+                            score (timesXwins, timesOwins, timesDraw);
                         }
                     }
-                    
                 }
                 else 
                 {
@@ -127,6 +138,9 @@ public class TicTacToe79
                     if (winner)
                     {
                         out.println ("\nO is the winner!");
+                        timesOwins = timesOwins + 1;
+                        //call function to print the score
+                        score (timesXwins, timesOwins, timesDraw);
                     }
                     else
                     //call function to check if draw
@@ -135,6 +149,9 @@ public class TicTacToe79
                         if (draw)
                         {
                             out.println ("\nIt's a draw!");
+                            timesDraw = timesDraw + 1;
+                            //call function to print the score
+                            score (timesXwins, timesOwins, timesDraw);
                         }
                     }
                 }
@@ -297,7 +314,6 @@ public class TicTacToe79
         return wongame;        
     }
 
-
     public static boolean isdraw (int drawgrid [][])
     {
         //set filledgrid to true, meaning it is a draw, because going to set to false if any one of 
@@ -315,5 +331,9 @@ public class TicTacToe79
         }
         return filledgrid;
     }
-                
+    public static void score (int numXwins, int numOwins, int numDraws)
+    {
+        out.println ("Score: X = " + numXwins + ", O = " + numOwins + ", Draws = " + numDraws);
+    }
+
 }
